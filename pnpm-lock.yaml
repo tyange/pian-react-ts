@@ -8,7 +8,9 @@ specifiers:
   '@mui/styled-engine-sc': ^5.12.0
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
+  '@types/styled-components': ^5.1.26
   '@vitejs/plugin-react': ^3.1.0
+  mdi-material-ui: ^7.7.0
   react: ^18.2.0
   react-dom: ^18.2.0
   styled-components: ^5.3.9
@@ -20,7 +22,9 @@ dependencies:
   '@emotion/styled': 11.10.6_bpa2amdickk76qs7xzoz3lzv3m
   '@mui/icons-material': 5.11.16_i5qtfz56gxv345p4d7l42p6ta4
   '@mui/material': 5.12.0_rg2yyp2bpmu7sjcft7cf5grtye
-  '@mui/styled-engine-sc': 5.12.0_styled-components@5.3.9
+  '@mui/styled-engine-sc': 5.12.0_6b2pycadepqgijxzbazcxwr4ly
+  '@types/styled-components': 5.1.26
+  mdi-material-ui: 7.7.0_cksmb2rzbie4prkuacyiz3bpm4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   styled-components: 5.3.9_biqbaboplfbrettd7655fr4n2y
@@ -729,7 +733,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@mui/styled-engine-sc/5.12.0_styled-components@5.3.9:
+  /@mui/styled-engine-sc/5.12.0_6b2pycadepqgijxzbazcxwr4ly:
     resolution: {integrity: sha512-3MgYoY2YG5tx0E5oKqvCv94oL0ABVBr+qpcyvciXW/v0wzPG6bXvuZV80GHYlJfasgnnRa1AbRWf5a9FcX8v6g==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -740,6 +744,7 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.21.0
+      '@types/styled-components': 5.1.26
       prop-types: 15.8.1
       styled-components: 5.3.9_biqbaboplfbrettd7655fr4n2y
     dev: false
@@ -825,6 +830,13 @@ packages:
     resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
     dev: false
 
+  /@types/hoist-non-react-statics/3.3.1:
+    resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
+    dependencies:
+      '@types/react': 18.0.35
+      hoist-non-react-statics: 3.3.2
+    dev: false
+
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: false
@@ -859,6 +871,14 @@ packages:
 
   /@types/scheduler/0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
+
+  /@types/styled-components/5.1.26:
+    resolution: {integrity: sha512-KuKJ9Z6xb93uJiIyxo/+ksS7yLjS1KzG6iv5i78dhVg/X3u5t1H7juRWqVmodIdz6wGVaIApo1u01kmFRdJHVw==}
+    dependencies:
+      '@types/hoist-non-react-statics': 3.3.1
+      '@types/react': 18.0.35
+      csstype: 3.1.2
+    dev: false
 
   /@vitejs/plugin-react/3.1.0_vite@4.2.1:
     resolution: {integrity: sha512-AfgcRL8ZBhAlc3BFdigClmTUMISmmzHn7sB2h9U1odvc5U/MjWXsAaz18b/WoppUTDBzxOJwo2VdClfUcItu9g==}
@@ -1171,6 +1191,16 @@ packages:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
+
+  /mdi-material-ui/7.7.0_cksmb2rzbie4prkuacyiz3bpm4:
+    resolution: {integrity: sha512-ABcksXoeJhOzy2rQCIEs0+j2K++wLOYAZcLX7mLyWaYycaDKFMcgqg8Up6xHcXxNNMSmggLcw/05fNFZE1LcIg==}
+    peerDependencies:
+      '@mui/material': ^5.0.0 || ^5.0.0-rc.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@mui/material': 5.12.0_rg2yyp2bpmu7sjcft7cf5grtye
+      react: 18.2.0
+    dev: false
 
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
