@@ -1,16 +1,23 @@
-import Drawer from "@mui/material/Drawer";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import {
+  Drawer,
+  Toolbar,
+  List,
+  Divider,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Box,
+} from "@mui/material";
+
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 
+import { grey } from "@mui/material/colors";
+
 const SideBar = () => {
   const drawerWidth = 240;
+  const backdropColor = grey[50];
 
   return (
     <Drawer
@@ -20,28 +27,24 @@ const SideBar = () => {
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
+          borderRight: "none",
+          backgroundColor: backdropColor,
         },
       }}
       variant="permanent"
       anchor="left"
     >
-      <Toolbar />
-      <Divider />
+      <Toolbar disableGutters sx={{ boxShadow: "none" }}>
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: "primary.main",
+          }}
+        ></Box>
+      </Toolbar>
       <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
