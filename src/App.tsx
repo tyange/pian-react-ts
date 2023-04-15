@@ -1,11 +1,12 @@
 import "./App.css";
+import Layout from "./components/layout/Layout";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <p>Hello world</p>
+      <Layout />
     </div>
   );
-}
+};
 
 export default App;
