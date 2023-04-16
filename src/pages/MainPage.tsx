@@ -3,10 +3,12 @@ import { useQuery } from "react-query";
 
 import BurgerAPI from "../api/burger/BurgerAPI";
 
-import Layout from "../components/layout/Layout";
 import { CircularProgress } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
+
+import Layout from "../components/layout/Layout";
 import BurgerItem from "../components/burger-item/BurgerItem";
+
+import { StyledGrid } from "../styles/StyledGrid";
 
 const MainPage = () => {
   const { data, isLoading, error } = useQuery("allBurger", () =>
@@ -15,22 +17,21 @@ const MainPage = () => {
 
   return (
     <Layout>
-      <Grid container rowSpacing={3}>
+      <StyledGrid>
         {isLoading && <CircularProgress />}
         {data &&
           !isLoading &&
           !error &&
           data.map((burger, index) => (
-            <Grid xs={2} sm={4} md={4} key={index}>
-              <BurgerItem
-                userId={burger.userId}
-                name={burger.name}
-                brand={burger.brand}
-                description={burger.description}
-              />
-            </Grid>
+            <BurgerItem
+              key={index}
+              userId={burger.userId}
+              name={burger.name}
+              brand={burger.brand}
+              description={burger.description}
+            />
           ))}
-      </Grid>
+      </StyledGrid>
     </Layout>
   );
 };

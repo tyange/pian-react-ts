@@ -18,9 +18,9 @@ type BurgerItemProps = {
 
 const BurgerItem = ({ userId, name, brand, description }: BurgerItemProps) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: "auto" }}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: 140, backgroundSize: "contain" }}
         image={defaultBurgerImg}
         title="default burger image"
       />
