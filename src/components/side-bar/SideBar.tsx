@@ -1,26 +1,14 @@
-import { useReducer, useState } from "react";
-
+import { useReducer } from "react";
 import styled from "styled-components";
-import {
-  Drawer,
-  Toolbar,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Box,
-  Collapse,
-  Typography,
-} from "@mui/material";
 
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Drawer, Toolbar, List, Box } from "@mui/material";
 
-import pianLogo from "../../assets/red-x-on-pickle.png";
+import SideBarItem from "./side-bar-item/SideBarItem";
 
 import { grey } from "@mui/material/colors";
 import { LunchDining, QuestionMark } from "@mui/icons-material";
-import SideBarItem from "./side-bar-item/SideBarItem";
+
+import pianLogo from "../../assets/red-x-on-pickle.png";
 
 type SideBarStateType = {
   [key: string]: {

@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 
 import { SideBarActionType } from "../SideBar";
+import { CustomLink } from "../../../styles/CustomLink";
 
 import { ExpandMore } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 
 type SideBarItemProps = {
   state: boolean;
@@ -56,9 +56,9 @@ const SideBarItem = ({
             <ListItem key={childText} disablePadding>
               <ListItemButton sx={{ pl: 10 }} disableGutters>
                 <ListItemText sx={{ padding: 0 }} inset>
-                  <Link to={path}>
+                  <CustomLink to={path}>
                     <Typography variant="body2">{childText}</Typography>
-                  </Link>
+                  </CustomLink>
                 </ListItemText>
               </ListItemButton>
             </ListItem>
