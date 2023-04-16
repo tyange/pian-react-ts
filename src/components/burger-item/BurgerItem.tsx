@@ -31,7 +31,17 @@ const BurgerItem = ({ userId, name, brand, description }: BurgerItemProps) => {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {brand}
         </Typography>
-        <Typography variant="body2">{description}</Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            wordBreak: "break-all",
+          }}
+        >
+          {description}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>

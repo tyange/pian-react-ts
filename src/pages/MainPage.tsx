@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import BurgerAPI from "../api/burger/BurgerAPI";
 
 import Layout from "../components/layout/Layout";
-import { CircularProgress, Container } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import BurgerItem from "../components/burger-item/BurgerItem";
 
@@ -12,10 +12,6 @@ const MainPage = () => {
   const { data, isLoading, error } = useQuery("allBurger", () =>
     BurgerAPI.getAllBurger()
   );
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <Layout>
