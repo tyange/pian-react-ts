@@ -113,6 +113,7 @@ const SideBar = () => {
           state={state["burger"].isOpen}
           dispatch={dispatch}
           dispatchActionType={{ type: "burgerToggle" }}
+          path="/"
           icon={<LunchDining />}
           texts={{
             primary: "햄버거",
@@ -123,6 +124,7 @@ const SideBar = () => {
           state={state["question"].isOpen}
           dispatch={dispatch}
           dispatchActionType={{ type: "questionToggle" }}
+          path="/about"
           icon={<QuestionMark />}
           texts={{
             primary: "사이트에 대하여",

@@ -8,17 +8,18 @@ import {
   Collapse,
   List,
   Typography,
-  SvgIconTypeMap,
 } from "@mui/material";
 
 import { SideBarActionType } from "../SideBar";
 
 import { ExpandMore } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 type SideBarItemProps = {
   state: boolean;
   dispatch: Dispatch<SideBarActionType>;
   dispatchActionType: SideBarActionType;
+  path: string;
   icon: ReactNode;
   texts: {
     primary: string;
@@ -30,6 +31,7 @@ const SideBarItem = ({
   state,
   dispatch,
   dispatchActionType,
+  path,
   icon,
   texts,
 }: SideBarItemProps) => {
@@ -54,7 +56,9 @@ const SideBarItem = ({
             <ListItem key={childText} disablePadding>
               <ListItemButton sx={{ pl: 10 }} disableGutters>
                 <ListItemText sx={{ padding: 0 }} inset>
-                  <Typography variant="body2">{childText}</Typography>
+                  <Link to={path}>
+                    <Typography variant="body2">{childText}</Typography>
+                  </Link>
                 </ListItemText>
               </ListItemButton>
             </ListItem>
