@@ -10,7 +10,6 @@ specifiers:
   '@types/react-dom': ^18.0.11
   '@types/styled-components': ^5.1.26
   '@vitejs/plugin-react': ^3.1.0
-  mdi-material-ui: ^7.7.0
   react: ^18.2.0
   react-dom: ^18.2.0
   styled-components: ^5.3.9
@@ -24,7 +23,6 @@ dependencies:
   '@mui/material': 5.12.0_rg2yyp2bpmu7sjcft7cf5grtye
   '@mui/styled-engine-sc': 5.12.0_6b2pycadepqgijxzbazcxwr4ly
   '@types/styled-components': 5.1.26
-  mdi-material-ui: 7.7.0_cksmb2rzbie4prkuacyiz3bpm4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   styled-components: 5.3.9_biqbaboplfbrettd7655fr4n2y
@@ -1191,16 +1189,6 @@ packages:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
-
-  /mdi-material-ui/7.7.0_cksmb2rzbie4prkuacyiz3bpm4:
-    resolution: {integrity: sha512-ABcksXoeJhOzy2rQCIEs0+j2K++wLOYAZcLX7mLyWaYycaDKFMcgqg8Up6xHcXxNNMSmggLcw/05fNFZE1LcIg==}
-    peerDependencies:
-      '@mui/material': ^5.0.0 || ^5.0.0-rc.0
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@mui/material': 5.12.0_rg2yyp2bpmu7sjcft7cf5grtye
-      react: 18.2.0
-    dev: false
 
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}

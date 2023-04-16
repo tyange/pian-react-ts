@@ -15,11 +15,12 @@ import {
 } from "@mui/material";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Hamburger, Help, ViewList, HandExtended } from "mdi-material-ui";
 
 import pianLogo from "../../assets/red-x-on-pickle.png";
 
 import { grey } from "@mui/material/colors";
+import { LunchDining, QuestionMark } from "@mui/icons-material";
+import SideBarItem from "./side-bar-item/SideBarItem";
 
 type SideBarStateType = {
   [key: string]: {
@@ -45,7 +46,9 @@ const SideBarInitialState = {
   },
 };
 
-type SideBarActionType = { type: "burgerToggle" } | { type: "questionToggle" };
+export type SideBarActionType =
+  | { type: "burgerToggle" }
+  | { type: "questionToggle" };
 
 const reducer = (state: SideBarStateType, action: SideBarActionType) => {
   switch (action.type) {
@@ -106,58 +109,26 @@ const SideBar = () => {
         </Box>
       </Toolbar>
       <List>
-        <ListItem disablePadding>
-          <ListItemButton
-            sx={{ pl: 3 }}
-            onClick={() => dispatch({ type: "burgerToggle" })}
-            disableGutters
-          >
-            <ListItemIcon>
-              <Hamburger />
-            </ListItemIcon>
-            <ListItemText primary="햄버거" />
-            <ListItemIcon sx={{ justifyContent: "center" }}>
-              <ExpandMoreIcon />
-            </ListItemIcon>
-          </ListItemButton>
-        </ListItem>
-        <Collapse in={state["burger"].isOpen} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem disablePadding>
-              <ListItemButton sx={{ pl: 10 }} disableGutters>
-                <ListItemText sx={{ padding: 0 }} inset>
-                  <Typography variant="body2">버거 목록 보기</Typography>
-                </ListItemText>
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </Collapse>
-        <ListItem disablePadding>
-          <ListItemButton
-            sx={{ pl: 3 }}
-            onClick={() => dispatch({ type: "questionToggle" })}
-            disableGutters
-          >
-            <ListItemIcon>
-              <Help />
-            </ListItemIcon>
-            <ListItemText primary="사이트에 대하여" />
-            <ListItemIcon sx={{ justifyContent: "center" }}>
-              <ExpandMoreIcon />
-            </ListItemIcon>
-          </ListItemButton>
-        </ListItem>
-        <Collapse in={state["question"].isOpen} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem disablePadding>
-              <ListItemButton sx={{ pl: 10 }} disableGutters>
-                <ListItemText sx={{ padding: 0 }} inset>
-                  <Typography variant="body2">소개</Typography>
-                </ListItemText>
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </Collapse>
+        <SideBarItem
+          state={state["burger"].isOpen}
+          dispatch={dispatch}
+          dispatchActionType={{ type: "burgerToggle" }}
+          icon={<LunchDining />}
+          texts={{
+            primary: "햄버거",
+            children: ["버거 목록 보기"],
+          }}
+        />
+        <SideBarItem
+          state={state["question"].isOpen}
+          dispatch={dispatch}
+          dispatchActionType={{ type: "questionToggle" }}
+          icon={<QuestionMark />}
+          texts={{
+            primary: "사이트에 대하여",
+            children: ["소개"],
+          }}
+        />
       </List>
     </Drawer>
   );
