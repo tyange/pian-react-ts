@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useQuery } from "react-query";
+import { useQueries, useQuery } from "react-query";
 
 import BurgerAPI from "../api/burger/BurgerAPI";
 
@@ -9,20 +8,44 @@ import Layout from "../components/layout/Layout";
 import BurgerItem from "../components/burger-item/BurgerItem";
 
 import { StyledGrid } from "../styles/StyledGrid";
+import Paginator from "../components/paginator/Paginator";
+import { useEffect, useState } from "react";
 
 const MainPage = () => {
-  const { data, isLoading, error } = useQuery("allBurger", () =>
-    BurgerAPI.getAllBurger()
-  );
+  const [pageNum, setPageNum] = useState(1);
+
+  const queries = useQueries([
+    {
+      queryKey: ["allBurger", pageNum],
+      queryFn: () => BurgerAPI.getAllBurger(pageNum),
+    },
+    { queryKey: "allBurgerCounts", queryFn: () => BurgerAPI.getBurgerCounts() },
+  ]);
+
+  const {
+    data: burgerData,
+    isLoading: burgerDataIsLoading,
+    error: burgerDataError,
+  } = queries[0];
+
+  const {
+    data: burgerCountsData,
+    isLoading: burgerCountsDataIsLoading,
+    error: burgerCountsDataError,
+  } = queries[1];
+
+  const pageNumHandler = (index: number) => {
+    setPageNum(index);
+  };
 
   return (
     <Layout>
       <StyledGrid>
-        {isLoading && <CircularProgress />}
-        {data &&
-          !isLoading &&
-          !error &&
-          data.map((burger, index) => (
+        {burgerDataIsLoading && <CircularProgress />}
+        {burgerData &&
+          !burgerDataIsLoading &&
+          !burgerDataError &&
+          burgerData.map((burger, index) => (
             <BurgerItem
               key={index}
               userId={burger.userId}
@@ -32,6 +55,14 @@ const MainPage = () => {
             />
           ))}
       </StyledGrid>
+      {burgerCountsData &&
+        !burgerCountsDataIsLoading &&
+        !burgerCountsDataError && (
+          <Paginator
+            counts={parseInt(burgerCountsData)}
+            pageNumHandler={pageNumHandler}
+          />
+        )}
     </Layout>
   );
 };
