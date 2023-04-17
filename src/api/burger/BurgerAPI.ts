@@ -2,10 +2,10 @@ import { instance } from "../axiosInstance";
 import { Burger } from "../../types/Burger";
 
 const BurgerAPI = {
-  getAllBurger: async (pageParam?: string) => {
+  getAllBurger: async (pageParam?: number) => {
     try {
       const res = await instance.get<{ data: Burger[] }>(
-        `/burger?page=${pageParam ? pageParam : "1"}`
+        `/burger?page=${pageParam ? pageParam : 1}`
       );
 
       const data = res.data.data;
@@ -25,8 +25,19 @@ const BurgerAPI = {
         withCredentials: true,
       }
     ),
-  getBurgerCounts: async () =>
-    await instance.get<{ data: { counts: number } }>(`/burger/counts`),
+  getBurgerCounts: async () => {
+    try {
+      const res = await instance.get<{ data: { counts: string } }>(
+        `/burger/counts`
+      );
+
+      const data = res.data.data;
+
+      return data.counts;
+    } catch (err) {
+      console.log(err);
+    }
+  },
   addBurger: async (newBurger: Burger, token: string) => {
     await instance.post("/burger", newBurger, {
       headers: {
