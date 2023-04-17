@@ -1,4 +1,5 @@
-import { useQueries, useQuery } from "react-query";
+import { useState } from "react";
+import { useQueries } from "react-query";
 
 import BurgerAPI from "../api/burger/BurgerAPI";
 
@@ -6,10 +7,9 @@ import { CircularProgress } from "@mui/material";
 
 import Layout from "../components/layout/Layout";
 import BurgerItem from "../components/burger-item/BurgerItem";
+import Paginator from "../components/paginator/Paginator";
 
 import { StyledGrid } from "../styles/StyledGrid";
-import Paginator from "../components/paginator/Paginator";
-import { useEffect, useState } from "react";
 
 const MainPage = () => {
   const [pageNum, setPageNum] = useState(1);
