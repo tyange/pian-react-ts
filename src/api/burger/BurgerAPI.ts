@@ -2,7 +2,7 @@ import { instance } from "../axiosInstance";
 import { Burger } from "../../types/Burger";
 
 const BurgerAPI = {
-  getAllBurger: async (pageParam?: number) => {
+  getAllBurger: async (pageParam: number) => {
     try {
       const res = await instance.get<{ data: Burger[] }>(
         `/burger?page=${pageParam ? pageParam : 1}`

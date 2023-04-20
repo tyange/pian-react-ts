@@ -1,42 +1,47 @@
-import { useState } from "react";
-import { useQueries } from "react-query";
+import { useEffect, useState } from "react";
+import { useInfiniteQuery } from "react-query";
+import styled from "styled-components";
+import { instance } from "../api/axiosInstance";
 
-import BurgerAPI from "../api/burger/BurgerAPI";
+import { Burger } from "../types/Burger";
 
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Typography } from "@mui/material";
 
 import Layout from "../components/layout/Layout";
-import BurgerItem from "../components/burger-item/BurgerItem";
-import Paginator from "../components/paginator/Paginator";
+import BurgerList from "../components/burger-list/BurgerList";
 
 import { StyledGrid } from "../styles/StyledGrid";
 
 const MainPage = () => {
-  const [pageNum, setPageNum] = useState(1);
-
-  const queries = useQueries([
-    {
-      queryKey: ["allBurger", pageNum],
-      queryFn: () => BurgerAPI.getAllBurger(pageNum),
-    },
-    { queryKey: "allBurgerCounts", queryFn: () => BurgerAPI.getBurgerCounts() },
-  ]);
+  const [noMoreBurgerPage, setNoMoreBurgerPage] = useState(false);
 
   const {
     data: burgerData,
     isLoading: burgerDataIsLoading,
     error: burgerDataError,
-  } = queries[0];
+    fetchNextPage: fetchNextPageBurgerData,
+  } = useInfiniteQuery<{ burgers: Burger[]; page: number }>(
+    ["burgers"],
+    async ({ pageParam = 1 }) => {
+      const res = await instance.get(`/burger?page=${pageParam}`);
 
-  const {
-    data: burgerCountsData,
-    isLoading: burgerCountsDataIsLoading,
-    error: burgerCountsDataError,
-  } = queries[1];
+      return { burgers: res.data.data, page: pageParam };
+    },
+    {
+      getNextPageParam: (lastPage) => lastPage.page + 1,
+    }
+  );
 
-  const pageNumHandler = (index: number) => {
-    setPageNum(index);
-  };
+  useEffect(() => {
+    if (
+      burgerData &&
+      burgerData.pages[burgerData.pages.length - 1].burgers.length < 8
+    ) {
+      setNoMoreBurgerPage(true);
+    } else {
+      setNoMoreBurgerPage(false);
+    }
+  }, [burgerData]);
 
   return (
     <Layout>
@@ -45,26 +50,27 @@ const MainPage = () => {
         {burgerData &&
           !burgerDataIsLoading &&
           !burgerDataError &&
-          burgerData.map((burger, index) => (
-            <BurgerItem
-              key={index}
-              userId={burger.userId}
-              name={burger.name}
-              brand={burger.brand}
-              description={burger.description}
-            />
+          burgerData.pages.map((burgers, index) => (
+            <BurgerList key={index} burgers={burgers!.burgers} />
           ))}
       </StyledGrid>
-      {burgerCountsData &&
-        !burgerCountsDataIsLoading &&
-        !burgerCountsDataError && (
-          <Paginator
-            counts={parseInt(burgerCountsData)}
-            pageNumHandler={pageNumHandler}
-          />
+      <MoreButton>
+        {noMoreBurgerPage ? (
+          <Typography>모든 버거를 다 보고 있어요!</Typography>
+        ) : (
+          <Button onClick={() => fetchNextPageBurgerData()}>next</Button>
         )}
+      </MoreButton>
     </Layout>
   );
 };
+
+const MoreButton = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+`;
 
 export default MainPage;
